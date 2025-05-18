@@ -62,8 +62,16 @@ cursor
 
 Giao diện Ubuntu + XFCE4 sẽ khởi động, và bạn có thể sử dụng phần mềm **Cursor** như trên máy tính Linux.
 
-> 📱 Lưu ý: Bạn cần **cài app Termux: X11** và mở ứng dụng này song song khi chạy `cursor`.  
-> Link: https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
+Lưu ý quan trọng:
+- Bạn cần cài app Termux: X11 và mở ứng dụng này song song khi chạy cursor.
+👉 Tải tại: https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
+
+🛠️ Lỗi thường gặp:
+- Trong lần đầu tiên đăng nhập tài khoản Cursor, giao diện đăng nhập có thể không phản hồi.
+
+✅ Cách khắc phục:
+- Buộc dừng Termux và mở lại, sau đó gõ lại `cursor`
+- Quá trình đăng nhập sẽ hoạt động bình thường.
 
 ---
 
@@ -71,7 +79,7 @@ Giao diện Ubuntu + XFCE4 sẽ khởi động, và bạn có thể sử dụng 
 
 | Tên file                        | Vai trò                                      |
 |-------------------------------|----------------------------------------------|
-| `install_cursor.sh`           | Script cài đặt môi trường Ubuntu + Cursor    |
+| `install.sh`           | Script cài đặt môi trường Ubuntu + Cursor    |
 | `/usr/bin/cursor`             | Lệnh khởi chạy môi trường GUI + Cursor       |
 | `cursor_0.50_ubuntu_24.04.tar.xz` | Image Ubuntu + Cursor được cấu hình sẵn |
 
