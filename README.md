@@ -36,7 +36,7 @@ Dự án này cung cấp một giải pháp đơn giản để bạn:
 ```bash
 pkg update && pkg install wget -y
 wget https://raw.githubusercontent.com/KhanhNguyen9872/cursor-proot-android/refs/heads/main/install.sh
-bash install_cursor.sh
+bash install.sh
 ```
 
 > Script sẽ:
