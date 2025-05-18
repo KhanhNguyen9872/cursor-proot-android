@@ -39,6 +39,11 @@ wget https://raw.githubusercontent.com/KhanhNguyen9872/cursor-proot-android/refs
 bash install.sh
 ```
 
+⚠️ Nếu gặp lỗi mạng khi tải file hoặc cài package, hãy thử:
+- Bật VPN 1.1.1.1 của Cloudflare để vượt chặn hoặc cải thiện kết nối.
+👉 Tải app VPN chính chủ tại: https://1.1.1.1
+- Ứng dụng hoạt động nhanh, miễn phí, không cần đăng ký – rất hữu ích khi Termux bị giới hạn mạng.
+
 > Script sẽ:
 > - Cài các gói cần thiết: `proot-distro`, `termux-x11-nightly`, `pulseaudio`, ...
 > - Tải image Ubuntu đã cấu hình sẵn
