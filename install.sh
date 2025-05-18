@@ -3,6 +3,7 @@
 set -e
 
 echo "[*] Cập nhật và cài đặt các gói cần thiết..."
+termux-setup-storage
 pkg update -y
 pkg install -y x11-repo
 pkg install -y termux-x11-nightly
