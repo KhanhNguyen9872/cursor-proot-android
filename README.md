@@ -58,7 +58,7 @@ cursor
 Giao diện Ubuntu + XFCE4 sẽ khởi động, và bạn có thể sử dụng phần mềm **Cursor** như trên máy tính Linux.
 
 > 📱 Lưu ý: Bạn cần **cài app Termux: X11** và mở ứng dụng này song song khi chạy `cursor`.  
-> Link: https://f-droid.org/packages/com.termux.x11/
+> Link: https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
 
 ---
 
