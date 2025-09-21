@@ -17,7 +17,10 @@ pkg install -y thunar gvfs
 pkg install -y mousepad
 pkg install -y xfce4-terminal
 pkg install -y ristretto
+pkg install -y iproute2
+pkg install -y tigervnc x11vnc
 pkg install -y pavucontrol
+pkg install -y ca-certificates pulseaudio mesa xorg-xhost xorg-xprop libx11 gtk3 xterm firefox
 pkg install -y wget curl git unzip htop neofetch
 pkg install -y python3 which build-essential
 pkg install -y nodejs
@@ -56,7 +59,7 @@ export PULSE_SERVER=127.0.0.1
 # XDG_RUNTIME_DIR bắt buộc cho dbus trên Termux
 export XDG_RUNTIME_DIR="${TMPDIR:-/data/data/com.termux/files/usr/tmp}"
 mkdir -p "$XDG_RUNTIME_DIR"
-chmod 700 "$XDG_RUNTIME_DIR"
+chmod 777 "$XDG_RUNTIME_DIR"
 
 # Khởi chạy Termux:X11 server
 termux-x11 :0 -dpi 240 -listen tcp >/dev/null 2>&1 &
@@ -80,6 +83,9 @@ elif command -v dbus-launch >/dev/null 2>&1; then
   # Ít khi cần trên Termux, nhưng để dự phòng
   eval "$(dbus-launch --sh-syntax)"
 fi
+
+mkdir ~/.vnc/ -p
+x11vnc -display :0 -nopw -listen 0.0.0.0 -xkb -forever -bg
 
 # Chạy XFCE
 # Có thể đổi startxfce4 => xfce4-session nếu muốn
