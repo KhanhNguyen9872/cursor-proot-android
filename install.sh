@@ -12,8 +12,8 @@ pkg install -y proot-distro
 pkg install -y wget
 
 echo "[*] Tải image Cursor Ubuntu..."
-IMAGE_URL="https://github.com/KhanhNguyen9872/cursor-proot-android/releases/download/0.50/cursor_0.50_ubuntu_24.04.tar.xz"
-IMAGE_NAME="cursor_0.50_ubuntu_24.04.tar.xz"
+IMAGE_URL="https://github.com/KhanhNguyen9872/cursor-proot-android/releases/download/1.6.45/cursor_1.6.45_ubuntu_24.04.tar.xz"
+IMAGE_NAME="cursor_1.6.45_ubuntu_24.04.tar.xz"
 
 wget "$IMAGE_URL" -O "$IMAGE_NAME" || {
   echo "[!] Tải file thất bại. Thoát script."
