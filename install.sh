@@ -22,6 +22,7 @@ wget "$IMAGE_URL" -O "$IMAGE_NAME" || {
 }
 
 echo "[*] Khôi phục image với proot-distro..."
+proot-distro remove ubuntu
 proot-distro restore "$IMAGE_NAME" || {
   echo "[!] Khôi phục image thất bại. Thoát script."
   rm -f "$IMAGE_NAME"
