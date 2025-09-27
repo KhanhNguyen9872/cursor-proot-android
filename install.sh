@@ -9,6 +9,7 @@ pkg install -y x11-repo
 pkg install -y termux-x11-nightly
 pkg install -y pulseaudio
 pkg install -y virglrenderer-android
+pkg install -y angle-android
 pkg install -y proot-distro
 pkg install -y wget
 
@@ -38,14 +39,20 @@ cat > /data/data/com.termux/files/usr/bin/cursor << 'EOF'
 
 # Kill open X11 processes
 kill -9 $(pgrep -f "termux.x11") 2>/dev/null
-killall -9 termux-x11 Xwayland pulseaudio virgl_test_server_android
+kill -9 $(pgrep -f "virgl_test_server") 2> /dev/null
+kill -9 $(pgrep -f "virgl_test_server_android") 2>/dev/null
+kill -9 $(pgrep -f "pulseaudio") 2>/dev/null
 
 # Enable PulseAudio over Network
 pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
-virgl_test_server_android &
+virgl_test_server_android --angle-gl &
 
 # Prepare termux-x11 session
+export GALLIUM_DRIVER=virpipe
+export MESA_LOADER_DRIVER_OVERRIDE=virpipe
+export MESA_GL_VERSION_OVERRIDE=4.6COMPAT
+export MESA_GLES_VERSION_OVERRIDE=3.2
 export XDG_RUNTIME_DIR=${TMPDIR}
 export PULSE_SERVER=tcp:127.0.0.1:4713
 export DISPLAY=:0
@@ -58,8 +65,22 @@ sleep 3
 am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
 sleep 1
 
-# Login in PRoot Environment
-proot-distro login ubuntu --user root --shared-tmp --no-sysvipc -- /bin/bash -c  'export GALLIUM_DRIVER=virpipe && export DISPLAY=:0 && export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=${TMPDIR} && sudo service dbus start && su - droidmaster -c "dbus-launch --exit-with-session startxfce4"'
+# Login to proot as droidmaster (not root)
+proot-distro login ubuntu --user droidmaster --shared-tmp --no-sysvipc -- /bin/bash -c '
+  export DISPLAY=:0
+  export PULSE_SERVER=127.0.0.1
+  export XDG_RUNTIME_DIR=${TMPDIR}
+  export GALLIUM_DRIVER=virpipe
+  export MESA_LOADER_DRIVER_OVERRIDE=virpipe
+  export MESA_GL_VERSION_OVERRIDE=4.6COMPAT
+  export MESA_GLES_VERSION_OVERRIDE=3.2
+
+  # Start dbus session
+  dbus-daemon --session --fork
+
+  # Start XFCE
+  startxfce4
+'
 
 exit 0
 EOF
