@@ -38,6 +38,10 @@ pkg update && pkg install wget -y
 wget https://raw.githubusercontent.com/KhanhNguyen9872/cursor-proot-android/refs/heads/main/install.sh -O install.sh
 bash install.sh
 ```
+### Password user (root/droidmaster)
+```bash
+123456
+```
 
 ⚠️ Nếu gặp lỗi mạng khi tải file hoặc cài package, hãy thử:
 - Bật VPN 1.1.1.1 của Cloudflare để vượt chặn hoặc cải thiện kết nối.
