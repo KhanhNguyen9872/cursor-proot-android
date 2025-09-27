@@ -8,6 +8,7 @@ pkg update -y
 pkg install -y x11-repo
 pkg install -y termux-x11-nightly
 pkg install -y pulseaudio
+pkg install -y virglrenderer-android
 pkg install -y proot-distro
 pkg install -y wget
 
