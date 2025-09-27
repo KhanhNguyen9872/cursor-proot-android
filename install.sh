@@ -58,7 +58,7 @@ am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
 sleep 1
 
 # Login in PRoot Environment
-proot-distro login ubuntu --user root --shared-tmp --no-sysvipc -- /bin/bash -c  'export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=${TMPDIR} && sudo service dbus start && su - droidmaster -c "dbus-daemon --session --fork; env DISPLAY=:0 startxfce4"'
+proot-distro login ubuntu --user root --shared-tmp --no-sysvipc -- /bin/bash -c  'export GALLIUM_DRIVER=virpipe && export DISPLAY=:0 && export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=${TMPDIR} && sudo service dbus start && su - droidmaster -c "dbus-launch --exit-with-session startxfce4"'
 
 exit 0
 EOF
