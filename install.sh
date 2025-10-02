@@ -42,9 +42,10 @@ show_help() {
     echo "Usage: cursor [OPTION]"
     echo ""
     echo "Options:"
-    echo "  --help        Show this help message"
-    echo "  --uninstall   Uninstall cursor (removes all data)"
-    echo "  --reinstall   Reinstall cursor (removes all data and reinstalls)"
+    echo "  help          Show this help message"
+    echo "  uninstall     Uninstall cursor (removes all data)"
+    echo "  reinstall     Reinstall cursor (removes all data and reinstalls)"
+    echo "  login         Open cursor shell with environment variables"
     echo ""
     echo "Default login credentials:"
     echo "  Username: droidmaster"
@@ -54,6 +55,7 @@ show_help() {
     echo "  Password: 123456"
     echo ""
     echo "Run 'cursor' without arguments to start the desktop environment."
+    echo "Run 'cursor login' to open a shell with environment variables."
 }
 
 uninstall_cursor() {
@@ -83,24 +85,43 @@ reinstall_cursor() {
     fi
 }
 
+login_cursor() {
+    echo "Logging into cursor shell..."
+    proot-distro login ubuntu --user droidmaster --shared-tmp --no-sysvipc -- /bin/bash -c '
+        export DISPLAY=:0
+        export PULSE_SERVER=127.0.0.1
+        export XDG_RUNTIME_DIR=${TMPDIR}
+        export GALLIUM_DRIVER=virpipe
+        export MESA_LOADER_DRIVER_OVERRIDE=virpipe
+        export MESA_GL_VERSION_OVERRIDE=4.6COMPAT
+        export MESA_GLES_VERSION_OVERRIDE=3.2
+        dbus-daemon --session --fork
+        exec /bin/bash
+    '
+}
+
 case "$1" in
-    --help)
+    help)
         show_help
         exit 0
         ;;
-    --uninstall)
+    uninstall)
         uninstall_cursor
         exit 0
         ;;
-    --reinstall)
+    reinstall)
         reinstall_cursor
+        exit 0
+        ;;
+    login)
+        login_cursor
         exit 0
         ;;
     "")
         ;;
     *)
         echo "Unknown option: $1"
-        echo "Use 'cursor --help' for available options."
+        echo "Use 'cursor help' for available options."
         exit 1
         ;;
 esac
