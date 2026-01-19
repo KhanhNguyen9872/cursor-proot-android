@@ -120,7 +120,7 @@ rm -f "${SPLIT_FILES[@]}"
 clear
 print_status "Restoring image with proot-distro..."
 print_info "Running: proot-distro remove ubuntu"
-proot-distro remove ubuntu
+proot-distro remove ubuntu || echo 'OK'
 print_info "Running: proot-distro restore $FINAL_IMAGE"
 proot-distro restore "$FINAL_IMAGE" || {
   print_error "Failed to restore image. Exiting script."
