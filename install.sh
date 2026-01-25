@@ -243,12 +243,15 @@ agent_cursor() {
 }
 
 start_basic_services() {
-    if ! pgrep -f "pulseaudio" > /dev/null; then
-        pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
+    if ! pgrep -x pulseaudio >/dev/null; then
+        unset PULSE_SERVER
+        pulseaudio --start \
+          --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" \
+          --exit-idle-time=-1
         pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
     fi
-    
-    if ! pgrep -f "virgl_test_server_android" > /dev/null; then
+
+    if ! pgrep -f virgl_test_server_android >/dev/null; then
         virgl_test_server_android --angle-gl &
     fi
 }
