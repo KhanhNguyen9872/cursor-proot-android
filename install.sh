@@ -55,12 +55,12 @@ pkg install -y p7zip || exit 64
 clear
 
 print_status "Downloading Cursor Ubuntu image..."
-BASE_URL="https://github.com/KhanhNguyen9872/cursor-proot-android/releases/download/1.7.28/cursor_1.7.28_ubuntu_24.04.7z"
+BASE_URL="https://github.com/KhanhNguyen9872/cursor-proot-android/releases/download/2.4.22/cursor_2.4.22_ubuntu_24.04.7z"
 SPLIT_FILES=()
-for i in {001..030}; do
-    SPLIT_FILES+=("cursor_1.7.28_ubuntu_24.04.7z.$i")
+for i in {001..034}; do
+    SPLIT_FILES+=("cursor_2.4.22_ubuntu_24.04.7z.$i")
 done
-FINAL_IMAGE="cursor_1.7.28_ubuntu_24.04.tar.xz"
+FINAL_IMAGE="cursor_2.4.22_ubuntu_24.04.tar.xz"
 
 download_with_retry() {
     local url="$1"
@@ -107,8 +107,8 @@ for file in "${SPLIT_FILES[@]}"; do
 done
 
 print_status "Extracting split files..."
-print_info "Running: 7z x cursor_1.7.28_ubuntu_24.04.7z.001"
-7z x cursor_1.7.28_ubuntu_24.04.7z.001 || {
+print_info "Running: 7z x cursor_2.4.22_ubuntu_24.04.7z.001"
+7z x cursor_2.4.22_ubuntu_24.04.7z.001 || {
     print_error "Failed to extract files. Exiting script."
     rm -f "${SPLIT_FILES[@]}"
     exit 1
